@@ -1,14 +1,102 @@
 const video = document.getElementById('video');
 
-const emotionsdict = {
-  "angry":"https://www.imdb.com/title/tt1985949/",
-  "disgusted":"https://www.imdb.com/title/tt0114369/",
-  "fearful":"https://www.imdb.com/title/tt1457767/",
-  "happy":"https://www.imdb.com/title/tt0114369/",
-  "neutral":"https://www.imdb.com/title/tt11464826/",
-  "sad":"https://www.imdb.com/title/tt2380307/",
-  "surprised":"https://www.imdb.com/title/tt0167404/"
-  }
+// const emotionsdict = {
+//   "angry":"https://www.imdb.com/title/tt1985949/",
+//   "disgusted":"https://www.imdb.com/title/tt0114369/",
+//   "fearful":"https://www.imdb.com/title/tt1457767/",
+//   "happy":"https://www.imdb.com/title/tt0114369/",
+//   "neutral":"https://www.imdb.com/title/tt11464826/",
+//   "sad":"https://www.imdb.com/title/tt2380307/",
+//   "surprised":"https://www.imdb.com/title/tt0167404/"
+//   }
+
+  emotionsdict = {
+    "neutral": [
+       "https://www.imdb.com/title/tt0109830/",
+       "https://www.imdb.com/title/tt0359950/",
+       "https://www.imdb.com/title/tt0338013/",
+       "https://www.imdb.com/title/tt0335266/",
+       "https://www.imdb.com/title/tt0120382/",
+       "https://www.imdb.com/title/tt1605783/",
+       "https://www.imdb.com/title/tt0449059/",
+       "https://www.imdb.com/title/tt1045658/",
+       "https://www.imdb.com/title/tt1675434/",
+       "https://www.imdb.com/title/tt2883512/",
+       "https://www.imdb.com/title/tt2194499/"
+    ],
+    "fearful": [
+       "https://www.imdb.com/title/tt0114709/",
+       "https://www.imdb.com/title/tt0266543/",
+       "https://www.imdb.com/title/tt0114709/",
+       "https://www.imdb.com/title/tt0245429/",
+       "https://www.imdb.com/title/tt0892769/",
+       "https://www.imdb.com/title/tt0382932/",
+       "https://www.imdb.com/title/tt0780521/",
+       "https://www.imdb.com/title/tt1109624/",
+       "https://www.imdb.com/title/tt2096673/",
+       "https://www.imdb.com/title/tt1049413/",
+       "https://www.imdb.com/title/tt0317705/"
+    ],
+    "disgust": [
+       "https://www.imdb.com/title/tt0454921/",
+       "https://www.imdb.com/title/tt0119217/",
+       "https://www.imdb.com/title/tt0109830/",
+       "https://www.imdb.com/title/tt1454029/",
+       "https://www.imdb.com/title/tt2584384/",
+       "https://www.imdb.com/title/tt2245084/",
+       "https://www.imdb.com/title/tt2543472/",
+       "https://www.imdb.com/title/tt0878804/",
+       "https://www.imdb.com/title/tt3224458/",
+       "https://www.imdb.com/title/tt0059742/",
+       "https://www.imdb.com/title/tt1504320/"
+    ],
+    "happy": [
+       "https://www.imdb.com/title/tt2278388/",
+      "https://www.imdb.com/title/tt0211915/",
+      "https://www.imdb.com/title/tt3783958/",
+      "https://www.imdb.com/title/tt0045152/",
+      "https://www.imdb.com/title/tt4468740/",
+      "https://www.imdb.com/title/tt3521164/",
+      "https://www.imdb.com/title/tt3104988/",
+      "https://www.imdb.com/title/tt1485796/",
+      "https://www.imdb.com/title/tt0091042/",
+      "https://www.imdb.com/title/tt3281548/",
+      "https://www.imdb.com/title/tt0211915/"
+    ],
+    "sad": [
+       "https://www.imdb.com/title/tt2096673/",
+       "https://www.imdb.com/title/tt0110357/",
+       "https://www.imdb.com/title/tt0120689/",
+       "https://www.imdb.com/title/tt0268978/",
+       "https://www.imdb.com/title/tt0119217/",
+       "https://www.imdb.com/title/tt0388795/",
+       "https://www.imdb.com/title/tt0332280/",
+       "https://www.imdb.com/title/tt0783233/",
+       "https://www.imdb.com/title/tt4034228/",
+       "https://www.imdb.com/title/tt5726616/",
+       "https://www.imdb.com/title/tt3170832/",
+       "https://www.imdb.com/title/tt0338013/"
+    ],
+    "surprised": [
+      "https://www.imdb.com/title/tt1375666/",
+       "https://www.imdb.com/title/tt0482571/",
+       "https://www.imdb.com/title/tt0133093/",
+       "https://www.imdb.com/title/tt2543164/",
+       "https://www.imdb.com/title/tt0167404/",
+       "https://www.imdb.com/title/tt1130884/",
+       "https://www.imdb.com/title/tt5052448/",
+       "https://www.imdb.com/title/tt8946378/",
+       "https://www.imdb.com/title/tt6857112/",
+       "https://www.imdb.com/title/tt6751668/"
+    ],
+    "angry": [
+      "https://www.imdb.com/title/tt1109624/",
+      "https://www.imdb.com/title/tt0382932/",
+      "https://www.imdb.com/title/tt0075148/",
+      "https://www.imdb.com/title/tt0112573/",
+      "https://www.imdb.com/title/tt0468569/",
+      "https://www.imdb.com/title/tt0266697/"  ]
+}
 
 var socket = io.connect('http://127.0.0.1:5000');
 socket.on( 'connect', function() {
@@ -87,28 +175,15 @@ video.addEventListener('play', () => {
       // Log the emotion with the highest confidence
       // console.log(`Highest Emotion: ${maxEmotion} (${maxConfidence})`);
 
-      if(maxEmotion  === "happy"){
-        window.location.href = emotionsdict["happy"];
-      }
-      else if(maxEmotion  === "fearful"){
-        window.location.href = emotionsdict["fearful"];
-      }
-      else if(maxEmotion  === "disgusted"){
-        window.location.href = emotionsdict["disgusted"];
-      }
-      else if(maxEmotion  === "angry"){
-        window.location.href = emotionsdict["angry"];
-      }
-      else if(maxEmotion  === "neutral"){
-        window.location.href = emotionsdict["neutral"];
-      }
-      else if(maxEmotion  === "surprised"){
-        window.location.href = emotionsdict["surprised"];
-      }
-      else if(maxEmotion  === "sad"){
-        window.location.href = emotionsdict["sad"];
+      function getRandomMovieLink(emotion) {
+        let movies = emotionsdict[emotion];
+        return movies[Math.floor(Math.random() * movies.length)];
       }
 
+      if (maxEmotion) {
+        let randomMovieLink = getRandomMovieLink(maxEmotion);
+        window.location.href = randomMovieLink;
+      }
 
     }
 
