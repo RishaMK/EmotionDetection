@@ -16,7 +16,6 @@ The Face API Python repository is a Flask app that can perform face emotion dete
 Before you can use Face API Python, please ensure that the following prerequisites are met:
 - Python 3.6 or later is installed on your machine.
 - A webcam or camera connected to your computer.
-- 
 
 ## Installation
 To install and set up the Face API Python application, follow these steps:
